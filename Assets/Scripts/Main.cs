@@ -16,6 +16,16 @@ public class Main : MonoBehaviour {
     public GameObject weatherMakerPrefab;
     public GameObject world;
 
+    // Manual Weather Overrides for debugging
+    public bool manualWeatherOverride = false;
+    public bool gentleSnow = false;
+    public bool snowStorm = false;
+    public bool thunderstorm = false;
+    public bool clearDay = false;
+    public bool hail = false;
+    public bool sleet = false;
+
+
     public float cloudSpeedMultiplier = 1f;
     public bool cloudsSpeedUp = true;
     public float stillSeconds = 5f;
@@ -397,12 +407,65 @@ public class Main : MonoBehaviour {
         CorrectDarkSkyData();
         UpdateWeather(myDarkSkyCall.minutely.data[0]);
         isFirstPass = false;
-        float loopsPerSecond = 24;
 
-        
 
         StartCoroutine(SpeedUpTime());
 
+        if (!manualWeatherOverride) StartCoroutine(Loops());
+        else
+        {
+            if (gentleSnow)
+            {
+                UpdatePercip(1f, "snow", .05f);
+                //UpdateWind(.2f, .5f);
+                //UpdateVisibility(.9f);
+                //UpdateCloudCover(.9f);
+
+            }
+            else if (snowStorm)
+            {
+                UpdatePercip(1f, "snow", 1f);
+                UpdateWind(.7f, .5f);
+                UpdateVisibility(.3f);
+                UpdateCloudCover(1f);
+            }
+            else if (thunderstorm)
+            {
+                CheckForThunderstorm("severe thunderstorms");
+                UpdatePercip(1f, "rain", 1f);
+                UpdateWind(.7f, .5f);
+                UpdateVisibility(.7f);
+                UpdateCloudCover(1f);
+            }
+            else if (clearDay)
+            {
+                UpdatePercip(0f, "", 0f);
+                UpdateWind(.1f, .5f);
+                UpdateVisibility(1f);
+                UpdateCloudCover(.2f);
+            }
+            else if (hail)
+            {
+                UpdatePercip(1f, "hail", 1f);
+                UpdateWind(.7f, .5f);
+                UpdateVisibility(.3f);
+                UpdateCloudCover(1f);
+            }
+            else if (sleet)
+            {
+                UpdatePercip(1f, "sleet", 1f);
+                UpdateWind(.7f, .5f);
+                UpdateVisibility(.3f);
+                UpdateCloudCover(1f);
+            }
+        }
+
+       
+    }
+
+    IEnumerator Loops()
+    {
+        float loopsPerSecond = 60;
         // Loop through Minutes
         print("will begin looping through minutes");
         for (int m = 1; m < 60; m++)
@@ -410,7 +473,7 @@ public class Main : MonoBehaviour {
             if (myDarkSkyCall.minutely.data[m].time != -1)
             {
                 print("myDarkSkyCall.minutely.data[m].time = " + myDarkSkyCall.minutely.data[m].time);
-                
+
                 print("waiting for minute " + m);
                 DateTime minuteTime = UnixToDateTime(myDarkSkyCall.minutely.data[m].time);
                 if (manualLocation) minuteTime = ConvertLocalDateTimeToDestination(minuteTime);
@@ -518,7 +581,7 @@ public class Main : MonoBehaviour {
             //skySphere.CloudCover = cloudCover;
             if (skySphere.CloudCover != cloudCover)
             {
-                if (isFirstPass) skySphere.CloudCover = cloudCover;
+                if (isFirstPass && !manualWeatherOverride) skySphere.CloudCover = cloudCover;
                 else
                 {
                     if (cloudChangeCoroutine != null)
