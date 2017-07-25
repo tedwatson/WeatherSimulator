@@ -13,6 +13,9 @@ using DigitalRuby.WeatherMaker;
 
 public class Main : MonoBehaviour {
 
+    public GameObject weatherMakerPrefab;
+    public GameObject world;
+
     public float cloudSpeedMultiplier = 1f;
     public bool cloudsSpeedUp = true;
     public float stillSeconds = 5f;
@@ -71,6 +74,14 @@ public class Main : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        
+        // Turn off world and weather while APIs load
+        world.SetActive(false);
+        //weatherMakerPrefab.SetActive(false);
+        
+
+
+
         if (PlayerPrefs.GetInt("isManualLocation") == 1)
         {
             print("isManualLocation = 1");
@@ -330,6 +341,11 @@ public class Main : MonoBehaviour {
             }
         }
 
+        
+        // turn world and weather back on
+        world.SetActive(true);
+        //weatherMakerPrefab.SetActive(true);
+        
 
 
         // Set Day Night Cycle Parameters
@@ -382,6 +398,8 @@ public class Main : MonoBehaviour {
         UpdateWeather(myDarkSkyCall.minutely.data[0]);
         isFirstPass = false;
         float loopsPerSecond = 24;
+
+        
 
         StartCoroutine(SpeedUpTime());
 
