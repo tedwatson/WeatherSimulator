@@ -19,6 +19,12 @@ public class MenuController : MonoBehaviour {
 		
 	}
 
+    public void UseCurrentLocationButtonClicked()
+    {
+        PlayerPrefs.SetInt("isManualLocation", 0);
+        StartGame();
+    }
+
     public void UseManualLocationButtonClicked()
     {
         float latitude;
@@ -32,9 +38,14 @@ public class MenuController : MonoBehaviour {
             PlayerPrefs.SetInt("isManualLocation", 1);
             PlayerPrefs.SetFloat("Latitude", latitude);
             PlayerPrefs.SetFloat("Longitude", longitude);
-            SceneManager.LoadScene("Weather Scene");
+            StartGame();
         }
         else ShowInputError();
+    }
+
+    void StartGame()
+    {
+        SceneManager.LoadScene("Weather Scene");
     }
 
     bool isGoodLatitude(float lat)
