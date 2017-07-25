@@ -20,9 +20,9 @@ public class Main : MonoBehaviour {
     public float secondsPerHour = 1f / 4f;
     public float secondsPerHay = 3f;
 
-    public bool manualLocation;
-    public string manualLatitude;
-    public string manualLongitude;
+    private bool manualLocation;
+    private string manualLatitude;
+    private string manualLongitude;
 
     public WeatherMakerScript weatherMaker;
     public WeatherMakerDayNightCycleScript dayNightCycle;
@@ -71,6 +71,14 @@ public class Main : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        if (PlayerPrefs.GetInt("isManualLocation") == 1)
+        {
+            print("isManualLocation = 1");
+            manualLocation = true;
+            manualLatitude = PlayerPrefs.GetFloat("Latitude").ToString();
+            manualLongitude = PlayerPrefs.GetFloat("Longitude").ToString();
+        }
+        else manualLocation = false;
 
         incrementCloudCover = false;
         decrementCloudCover = false;
