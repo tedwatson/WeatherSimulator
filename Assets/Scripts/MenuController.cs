@@ -13,6 +13,7 @@ public class MenuController : MonoBehaviour {
 
 	void Start () {
         warningText.text = "";
+        PlayerPrefs.SetString("Override Setting", "none");
 	}
 	
 	void Update () {
@@ -41,6 +42,42 @@ public class MenuController : MonoBehaviour {
             StartGame();
         }
         else ShowInputError();
+    }
+
+    public void GentleSnowButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "gentle snow");
+        StartGame();
+    }
+
+    public void SnowStormButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "snow storm");
+        StartGame();
+    }
+
+    public void ClearDayButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "clear day");
+        StartGame();
+    }
+
+    public void HailButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "hail");
+        StartGame();
+    }
+
+    public void SleetButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "sleet");
+        StartGame();
+    }
+
+    public void ThunderStormButtonClicked()
+    {
+        PlayerPrefs.SetString("Override Setting", "thunder storm");
+        StartGame();
     }
 
     void StartGame()

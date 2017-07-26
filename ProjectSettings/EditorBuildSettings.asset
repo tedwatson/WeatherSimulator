@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: c97db9a39335c9f49aa266e7949d25e2
+  - enabled: 1
     path: Assets/Scenes/Weather Scene.unity
     guid: d3264cca5ca4fb0479238113cfca0b8a

@@ -94,6 +94,36 @@ public class Main : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        if (!PlayerPrefs.GetString("Override Setting").Equals("none"))
+        {
+            manualWeatherOverride = true;
+            switch (PlayerPrefs.GetString("Override Setting"))
+            {
+                case "gentle snow":
+                    gentleSnow = true;
+                    break;
+                case "snow storm":
+                    snowStorm = true;
+                    break;
+                case "clear day":
+                    clearDay = true;
+                    break;
+                case "hail":
+                    hail = true;
+                    break;
+                case "sleet":
+                    sleet = true;
+                    break;
+                case "thunder storm":
+                    thunderstorm = true;
+                    break;
+}
+                
+
+
+            }
+
+
         lampOffColor = new Color(0.483f, 0.475162f, 0.3693529f);
         lampOnColor = new Color(1.21f, 1.190365f, 0.9252941f);
         lampRenderer = japaneseStreetLamp.GetComponent<Renderer>();
