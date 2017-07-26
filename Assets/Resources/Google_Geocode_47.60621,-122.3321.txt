@@ -1,0 +1,605 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "Fourth and Madison Building",
+               "short_name" : "Fourth and Madison Building",
+               "types" : [ "premise" ]
+            },
+            {
+               "long_name" : "909",
+               "short_name" : "909",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "5th Avenue",
+               "short_name" : "5th Ave",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Central Business District",
+               "short_name" : "Central Business District",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "98164",
+               "short_name" : "98164",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "Fourth and Madison Building, 909 5th Ave, Seattle, WA 98164, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.6064798,
+                  "lng" : -122.3316426
+               },
+               "southwest" : {
+                  "lat" : 47.6060659,
+                  "lng" : -122.3323917
+               }
+            },
+            "location" : {
+               "lat" : 47.6062446,
+               "lng" : -122.3319929
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.60762183029149,
+                  "lng" : -122.3306681697085
+               },
+               "southwest" : {
+                  "lat" : 47.60492386970849,
+                  "lng" : -122.3333661302915
+               }
+            }
+         },
+         "place_id" : "ChIJ9bv3LrFqkFQRotc0wVEyvuA",
+         "types" : [ "premise" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "909",
+               "short_name" : "909",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "5th Avenue",
+               "short_name" : "5th Ave",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Downtown",
+               "short_name" : "Downtown",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "98164",
+               "short_name" : "98164",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "909 5th Ave, Seattle, WA 98164, USA",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.6063473,
+               "lng" : -122.3319422
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.6076962802915,
+                  "lng" : -122.3305932197085
+               },
+               "southwest" : {
+                  "lat" : 47.6049983197085,
+                  "lng" : -122.3332911802915
+               }
+            }
+         },
+         "place_id" : "ChIJ2YL9LrFqkFQR5JRZiYwXaIc",
+         "types" : [ "street_address" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "4th Ave & Madison St",
+               "short_name" : "4th Ave & Madison St",
+               "types" : [
+                  "bus_station",
+                  "establishment",
+                  "point_of_interest",
+                  "transit_station"
+               ]
+            },
+            {
+               "long_name" : "Central Business District",
+               "short_name" : "Central Business District",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "98164",
+               "short_name" : "98164",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "4th Ave & Madison St, Seattle, WA 98164, USA",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.606004,
+               "lng" : -122.3326913
+            },
+            "location_type" : "GEOMETRIC_CENTER",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.60735298029149,
+                  "lng" : -122.3313423197085
+               },
+               "southwest" : {
+                  "lat" : 47.6046550197085,
+                  "lng" : -122.3340402802915
+               }
+            }
+         },
+         "place_id" : "ChIJeb57I7FqkFQRV5UoIlT7GT0",
+         "types" : [
+            "bus_station",
+            "establishment",
+            "point_of_interest",
+            "transit_station"
+         ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Central Business District",
+               "short_name" : "Central Business District",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Central Business District, Seattle, WA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.616292,
+                  "lng" : -122.3280681
+               },
+               "southwest" : {
+                  "lat" : 47.60196,
+                  "lng" : -122.3426369
+               }
+            },
+            "location" : {
+               "lat" : 47.6082259,
+               "lng" : -122.334868
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.616292,
+                  "lng" : -122.3280681
+               },
+               "southwest" : {
+                  "lat" : 47.60196,
+                  "lng" : -122.3426369
+               }
+            }
+         },
+         "place_id" : "ChIJfV0jebZqkFQRbO0fq4I6dq4",
+         "types" : [ "neighborhood", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Downtown",
+               "short_name" : "Downtown",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Downtown, Seattle, WA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.6187201,
+                  "lng" : -122.3115362
+               },
+               "southwest" : {
+                  "lat" : 47.592048,
+                  "lng" : -122.3595382
+               }
+            },
+            "location" : {
+               "lat" : 47.6050242,
+               "lng" : -122.3343709
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.6187201,
+                  "lng" : -122.3115362
+               },
+               "southwest" : {
+                  "lat" : 47.592048,
+                  "lng" : -122.3595382
+               }
+            }
+         },
+         "place_id" : "ChIJLVcisbZqkFQRQx2ONFFfxkw",
+         "types" : [ "neighborhood", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Seattle, WA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.734145,
+                  "lng" : -122.2244331
+               },
+               "southwest" : {
+                  "lat" : 47.4919119,
+                  "lng" : -122.4596959
+               }
+            },
+            "location" : {
+               "lat" : 47.6062095,
+               "lng" : -122.3320708
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.734145,
+                  "lng" : -122.2359033
+               },
+               "southwest" : {
+                  "lat" : 47.4955511,
+                  "lng" : -122.4359086
+               }
+            }
+         },
+         "place_id" : "ChIJVTPokywQkFQRmtVEaUZlJRA",
+         "types" : [ "locality", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "98185",
+               "short_name" : "98185",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "Downtown",
+               "short_name" : "Downtown",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Seattle, WA 98185, USA",
+         "geometry" : {
+            "location" : {
+               "lat" : 47.6060781,
+               "lng" : -122.3329957
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.60742708029151,
+                  "lng" : -122.3316467197085
+               },
+               "southwest" : {
+                  "lat" : 47.60472911970851,
+                  "lng" : -122.3343446802915
+               }
+            }
+         },
+         "place_id" : "ChIJUwceK5sUkFQRcETIetRYIO4",
+         "types" : [ "postal_code" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "98164",
+               "short_name" : "98164",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "Central Business District",
+               "short_name" : "Central Business District",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Seattle",
+               "short_name" : "Seattle",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Seattle, WA 98164, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.607265,
+                  "lng" : -122.3311479
+               },
+               "southwest" : {
+                  "lat" : 47.60537189999999,
+                  "lng" : -122.3335642
+               }
+            },
+            "location" : {
+               "lat" : 47.606503,
+               "lng" : -122.3323955
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.60766743029149,
+                  "lng" : -122.3310070697085
+               },
+               "southwest" : {
+                  "lat" : 47.60496946970849,
+                  "lng" : -122.3337050302915
+               }
+            }
+         },
+         "place_id" : "ChIJtdQxKbFqkFQRMKxXNaDNUkk",
+         "types" : [ "postal_code" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "King County",
+               "short_name" : "King County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "King County, WA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 47.780328,
+                  "lng" : -121.065709
+               },
+               "southwest" : {
+                  "lat" : 47.084457,
+                  "lng" : -122.5410681
+               }
+            },
+            "location" : {
+               "lat" : 47.5480339,
+               "lng" : -121.9836029
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 47.780328,
+                  "lng" : -121.065709
+               },
+               "southwest" : {
+                  "lat" : 47.084457,
+                  "lng" : -122.5283843
+               }
+            }
+         },
+         "place_id" : "ChIJN3gtg4xckFQRPuBki2urgOI",
+         "types" : [ "administrative_area_level_2", "political" ]
+      },
+      {
+         "address_components" : [
+            {
+               "long_name" : "Seattle-Tacoma-Bellevue, WA",
+               "short_name" : "Seattle-Tacoma-Bellevue, WA",
+               "types" : [ "political" ]
+            },
+            {
+               "long_name" : "Washington",
+               "short_name" : "WA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            }
+         ],
+         "formatted_address" : "Seattle-Tacoma-Bellevue, WA, WA, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 48.299232,
+                  "lng" : -120.9062111
+               },
+               "southwest" : {
+                  "lat" : 46.728371,
+                  "lng" : -122.85295
+               }
+            },
+            "location" : {
+               "lat" : 47.6819594,
+               "lng" : -121.5492317
+            },
+            "location_type" : "APPROXIMATE",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 48.299232,
+                  "lng" : -120.9062111
+               },
+               "southwest" : {
+                  "lat" : 46.728371,
+                  "lng" : -122.85295
+               }
+            }
+         },
+         "place_id" : "ChIJ8SwgETd6kFQR2WRbADMk1jE",
+         "types" : [ "political" ]
+      }
+   ],
+   "status" : "OK"
+}

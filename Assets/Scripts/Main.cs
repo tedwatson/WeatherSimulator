@@ -13,10 +13,13 @@ using DigitalRuby.WeatherMaker;
 
 public class Main : MonoBehaviour {
 
+    public GameObject japaneseStreetLamp;
+    public Light lampPointLight;
     public GameObject weatherMakerPrefab;
     public GameObject world;
 
     // Manual Weather Overrides for debugging
+    public bool printDebug = false;
     public bool manualWeatherOverride = false;
     public bool gentleSnow = false;
     public bool snowStorm = false;
@@ -82,9 +85,24 @@ public class Main : MonoBehaviour {
 
     private static string folderPath;
 
+    private Color lampOffColor;
+    private Color lampOnColor;
+    private Renderer lampRenderer;
+    private bool lampOn;
+    float sunriseTime;
+    float sunsetTime;
+
     // Use this for initialization
     void Start() {
+        lampOffColor = new Color(0.483f, 0.475162f, 0.3693529f);
+        lampOnColor = new Color(1.21f, 1.190365f, 0.9252941f);
+        lampRenderer = japaneseStreetLamp.GetComponent<Renderer>();
+        //Material material = renderer.
+        //renderer.material.shader = Shader.Find("Emission");
+        //lampRenderer.material.SetColor("_EmissionColor", lampNightColor);
         
+
+
         // Turn off world and weather while APIs load
         world.SetActive(false);
         //weatherMakerPrefab.SetActive(false);
@@ -94,7 +112,7 @@ public class Main : MonoBehaviour {
 
         if (PlayerPrefs.GetInt("isManualLocation") == 1)
         {
-            print("isManualLocation = 1");
+            if (printDebug) print("isManualLocation = 1");
             manualLocation = true;
             manualLatitude = PlayerPrefs.GetFloat("Latitude").ToString();
             manualLongitude = PlayerPrefs.GetFloat("Longitude").ToString();
@@ -147,6 +165,31 @@ public class Main : MonoBehaviour {
 
         if      (incrementCloudVelocity_y) skySphere.CloudNoiseVelocity.y += cloudVelocityChangeSpeed * Time.deltaTime;
         else if (decrementCloudVelocity_y) skySphere.CloudNoiseVelocity.y -= cloudVelocityChangeSpeed * Time.deltaTime;
+
+
+        float currentTime = dayNightCycle.TimeOfDay;
+        if (sunriseTime != -1 && sunriseTime != 0 && sunsetTime != -1 && sunsetTime != 0)
+        {
+            if ((currentTime < sunriseTime || currentTime > sunsetTime) && !lampOn)
+            {
+                // Turn lamp on
+                print("turning lamp on");
+                lampRenderer.material.SetColor("_EmissionColor", lampOnColor);
+                lampPointLight.enabled = true;
+                lampOn = true;
+            }
+            else if (currentTime > sunriseTime && currentTime < sunsetTime && lampOn)
+            {
+                // Turn lamp off
+                print("turning lamp off");
+                lampRenderer.material.SetColor("_EmissionColor", lampOffColor);
+                lampPointLight.enabled = false;
+                lampOn = false;
+            }
+        }
+
+
+
 
         /*
         skySphere.CloudNoiseVelocity.x = baseCloudVelocity_x * dayNightCycle.Speed * cloudSpeedMultiplier;
@@ -265,7 +308,7 @@ public class Main : MonoBehaviour {
             }
         }
 
-        print("myLatLon = " + myLatLon);
+        if (printDebug) print("myLatLon = " + myLatLon);
         // Get Dark Sky Weather
         if (!hasFile(myLatLon))
         {
@@ -355,7 +398,6 @@ public class Main : MonoBehaviour {
         // turn world and weather back on
         world.SetActive(true);
         //weatherMakerPrefab.SetActive(true);
-        
 
 
         // Set Day Night Cycle Parameters
@@ -402,12 +444,30 @@ public class Main : MonoBehaviour {
         realStartTime = DateTime.Now;
 
         startTime = GetDateTimeFromWeathermakerTime(dayNightCycle.TimeOfDay, dayNightCycle.Day, dayNightCycle.Month, dayNightCycle.Year);
-        print("startTime = " + startTime.ToLongDateString() + " " + startTime.ToLongTimeString());
+        if (printDebug) print("startTime = " + startTime.ToLongDateString() + " " + startTime.ToLongTimeString());
 
         CorrectDarkSkyData();
         UpdateWeather(myDarkSkyCall.minutely.data[0]);
         isFirstPass = false;
 
+        DateTime sunriseDT = UnixToDateTime(myDarkSkyCall.daily.data[0].sunriseTime);
+        DateTime sunsetDT = UnixToDateTime(myDarkSkyCall.daily.data[0].sunsetTime);
+        if (manualLocation)
+        {
+            sunriseDT = ConvertLocalDateTimeToDestination(sunriseDT);
+            sunsetDT = ConvertLocalDateTimeToDestination(sunsetDT);
+        }
+        sunriseTime = (float)(sunriseDT - new DateTime(sunriseDT.Year,
+                                                       sunriseDT.Month,
+                                                       sunriseDT.Day)).TotalSeconds;
+        sunsetTime = (float)(sunsetDT - new DateTime(sunsetDT.Year,
+                                                     sunsetDT.Month,
+                                                     sunsetDT.Day)).TotalSeconds;
+
+        
+
+        print("sunriseTime = " + sunriseTime);
+        print("sunsetTime = " + sunsetTime);
 
         StartCoroutine(SpeedUpTime());
 
@@ -467,20 +527,14 @@ public class Main : MonoBehaviour {
     {
         float loopsPerSecond = 60;
         // Loop through Minutes
-        print("will begin looping through minutes");
+        if (printDebug) print("will begin looping through minutes");
         for (int m = 1; m < 60; m++)
         {
             if (myDarkSkyCall.minutely.data[m].time != -1)
             {
-                print("myDarkSkyCall.minutely.data[m].time = " + myDarkSkyCall.minutely.data[m].time);
-
-                print("waiting for minute " + m);
+                if (printDebug) print("waiting for minute " + m);
                 DateTime minuteTime = UnixToDateTime(myDarkSkyCall.minutely.data[m].time);
                 if (manualLocation) minuteTime = ConvertLocalDateTimeToDestination(minuteTime);
-                print("minuteTime.Year = " + minuteTime.Year);
-                print("minuteTime.Year = " + minuteTime.Month);
-                print("minuteTime.Year = " + minuteTime.Day);
-                print("minuteTime.Year = " + minuteTime.TimeOfDay.TotalSeconds);
                 while (dayNightCycle.Year < minuteTime.Year ||
                         dayNightCycle.Month < minuteTime.Month ||
                         dayNightCycle.Day < minuteTime.Day ||
@@ -488,17 +542,16 @@ public class Main : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(1 / loopsPerSecond);
                 }
-                print("Updating weather for minute " + m);
                 UpdateWeather(myDarkSkyCall.minutely.data[m]);
             }
         }
         // Loop through Hours
-        print("will begin looping through hours");
+        if (printDebug) print("will begin looping through hours");
         for (int h = 1; h < 48; h++)
         {
             if (myDarkSkyCall.hourly.data[h].time != -1)
             {
-                print("waiting for hour " + h);
+                if (printDebug) print("waiting for hour " + h);
                 DateTime hourTime = UnixToDateTime(myDarkSkyCall.hourly.data[h].time);
                 if (manualLocation) hourTime = ConvertLocalDateTimeToDestination(hourTime);
                 while (dayNightCycle.Year < hourTime.Year ||
@@ -508,18 +561,17 @@ public class Main : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(1 / loopsPerSecond);
                 }
-                print("Updating weather for hour " + h);
                 UpdateWeather(myDarkSkyCall.hourly.data[h]);
             }
         }
 
         // Loop through Days
-        print("will begin looping through days");
+        if (printDebug) print("will begin looping through days");
         for (int d = 2; d < 7; d++)
         {
             if (myDarkSkyCall.daily.data[2].time != -1)
             {
-                print("waiting for day " + d);
+                if (printDebug) print("waiting for day " + d);
                 DateTime dayTime = UnixToDateTime(myDarkSkyCall.daily.data[d].time);
                 if (manualLocation) dayTime = ConvertLocalDateTimeToDestination(dayTime);
                 while (dayNightCycle.Year < dayTime.Year ||
@@ -529,7 +581,6 @@ public class Main : MonoBehaviour {
                 {
                     yield return new WaitForSeconds(1 / loopsPerSecond);
                 }
-                print("Updating weather for day " + d);
                 UpdateWeather(myDarkSkyCall.daily.data[d]);
             }
         }
@@ -577,7 +628,7 @@ public class Main : MonoBehaviour {
     {
         if (!float.IsNaN(cloudCover))
         {
-            print("cloud clover = " + cloudCover);
+            if (printDebug) print("cloud clover = " + cloudCover);
             //skySphere.CloudCover = cloudCover;
             if (skySphere.CloudCover != cloudCover)
             {
@@ -670,8 +721,8 @@ public class Main : MonoBehaviour {
     void UpdateWind(float windSpeed, float windBearing)
     {
         if (windSpeed != float.NaN)
-        { 
-            print("Wind speed is " + windSpeed);
+        {
+            if (printDebug) print("Wind speed is " + windSpeed);
             wind.WindIntensity = ConvertWindSpeed(windSpeed);
             windSpeed *= dayNightCycle.Speed * cloudSpeedMultiplier;
             double d = (0.005 * windSpeed);
@@ -715,9 +766,9 @@ public class Main : MonoBehaviour {
     {
         //print("Updating Percip");
         bool percipRollAchieved = false;
-        if (!string.IsNullOrEmpty(type)) print("Percip type is " + type);
+        if (!string.IsNullOrEmpty(type)) if (printDebug) print("Percip type is " + type);
         //else print("Percip type is null or empty");
-        if (probability != float.NaN) print("Percip probability is " + probability);
+        if (probability != float.NaN) if (printDebug) print("Percip probability is " + probability);
         //else print("probability is NaN");
 
         if (probability == float.NaN)
@@ -728,15 +779,15 @@ public class Main : MonoBehaviour {
         else if (probability > 0)
         {
             float percipRoll = UnityEngine.Random.Range(0, 1f);
-            print("percipRoll = " + percipRoll);
+            if (printDebug) print("percipRoll = " + percipRoll);
             if (probability >= percipRoll)
             {
-                print("percip roll achieved!");
+                if (printDebug) print("percip roll achieved!");
                 percipRollAchieved = true;
             }
             else
             {
-                print("percip roll failed");
+                if (printDebug) print("percip roll failed");
                 percipRollAchieved = false;
             }
         }
@@ -745,19 +796,19 @@ public class Main : MonoBehaviour {
             switch (type)
             {
                 case "rain":
-                    print("raining");
+                    if (printDebug) print("raining");
                     weatherMaker.Precipitation = WeatherMakerPrecipitationType.Rain;
                     break;
                 case "snow":
-                    print("snowing");
+                    if (printDebug) print("snowing");
                     weatherMaker.Precipitation = WeatherMakerPrecipitationType.Snow;
                     break;
                 case "sleet":
-                    print("sleeting");
+                    if (printDebug) print("sleeting");
                     weatherMaker.Precipitation = WeatherMakerPrecipitationType.Sleet;
                     break;
                 case "hail":
-                    print("hailing");
+                    if (printDebug) print("hailing");
                     weatherMaker.Precipitation = WeatherMakerPrecipitationType.Hail;
                     break;
                 default:
@@ -766,12 +817,12 @@ public class Main : MonoBehaviour {
             }
             if (intensity == float.NaN)
             {
-                print("percip intensity is NaN, setting intensity to 0.5");
+                if (printDebug) print("percip intensity is NaN, setting intensity to 0.5");
                 weatherMaker.PrecipitationIntensity = 0.5f;
             }
             else
             {
-                print("percip intensity is " + ConvertPercipIntensity(intensity));
+                if (printDebug) print("percip intensity is " + ConvertPercipIntensity(intensity));
                 weatherMaker.PrecipitationIntensity = ConvertPercipIntensity(intensity);
             }
         }
@@ -786,7 +837,7 @@ public class Main : MonoBehaviour {
                                             icon.Equals("thunder") ||
                                             icon.Equals("severe thunder")))
         {
-            print("thunderstorm");
+            if (printDebug) print("thunderstorm");
             thunderAndLightning.EnableLightning = true;
             if (icon.Contains("severe"))
             {
@@ -810,21 +861,21 @@ public class Main : MonoBehaviour {
     void ImportLocation(string text)
     {
         myLocation = JsonConvert.DeserializeObject<Location>(text);
-        if (!manualLocation) print("My location is " + myLocation.city);
+        if (!manualLocation) if (printDebug) print("My location is " + myLocation.city);
     }
 
     void ImportG_Location(string text)
     {
         myG_Location = JsonConvert.DeserializeObject<G_Location>(text);
-        print("My location is " + myG_Location.results[0].formatted_address);
+        if (printDebug) print("My location is " + myG_Location.results[0].formatted_address);
     }
 
     void ImportWeather(string text)
     {
         myDarkSkyCall = new DarkSkyCall();
         myDarkSkyCall = JsonConvert.DeserializeObject<DarkSkyCall>(text);
-        print("The weather is " + myDarkSkyCall.currently.icon);
-        print("The temperature is " + myDarkSkyCall.currently.temperature);
+        if (printDebug) print("The weather is " + myDarkSkyCall.currently.icon);
+        if (printDebug) print("The temperature is " + myDarkSkyCall.currently.temperature);
     }
 
     void Y_ImportWeather(string text)
@@ -832,8 +883,8 @@ public class Main : MonoBehaviour {
         myYahooWeatherCall = new YahooWeatherCall();
         myYahooWeatherCall = JsonConvert.DeserializeObject<YahooWeatherCall>(text);
         //print("myYahooWeatherCall.query.count = " + myYahooWeatherCall.query.count);
-        print("The Yahoo weather is " + myYahooWeatherCall.query.results.channel.item.condition.text);
-        print("The Yahoo temperature is " + myYahooWeatherCall.query.results.channel.item.condition.temp);
+        if (printDebug) print("The Yahoo weather is " + myYahooWeatherCall.query.results.channel.item.condition.text);
+        if (printDebug) print("The Yahoo temperature is " + myYahooWeatherCall.query.results.channel.item.condition.temp);
     }
 
     static void DeleteOldFiles()
@@ -1210,7 +1261,7 @@ public class Main : MonoBehaviour {
             else break;
         }
 
-        print("Dark Sky call does " + (hasCurrently ? "" : "not ") + "have current weather. Has first " + minutelyCount + " minutes, " + hourlyCount + " hours, and " + dailyCount + " days.");
+        if (printDebug) print("Dark Sky call does " + (hasCurrently ? "" : "not ") + "have current weather. Has first " + minutelyCount + " minutes, " + hourlyCount + " hours, and " + dailyCount + " days.");
     }
 
     void CopyPasteFromCurrentlyToFirstMinute()
@@ -1265,5 +1316,6 @@ public class Main : MonoBehaviour {
         dayNightCycle.Month = dt.Month;
         dayNightCycle.Day = dt.Day;
     }
+
 }
 
