@@ -808,6 +808,7 @@ public class Main : MonoBehaviour {
         }
         else if (probability > 0)
         {
+            // Roll for Percipitation
             float percipRoll = UnityEngine.Random.Range(0, 1f);
             if (printDebug) print("percipRoll = " + percipRoll);
             if (probability >= percipRoll)
@@ -855,6 +856,11 @@ public class Main : MonoBehaviour {
                 if (printDebug) print("percip intensity is " + ConvertPercipIntensity(intensity));
                 weatherMaker.PrecipitationIntensity = ConvertPercipIntensity(intensity);
             }
+        }
+        else
+        {
+            weatherMaker.Precipitation = WeatherMakerPrecipitationType.None;
+            weatherMaker.PrecipitationIntensity = 0;
         }
     }
 
