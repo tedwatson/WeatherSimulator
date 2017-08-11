@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Assets.Scripts
 {
     class YahooWeatherCall // // Class for storing the deserialized JSON text from an API call containing information from Yahoo Weather

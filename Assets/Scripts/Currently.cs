@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Assets.Scripts
 {
     class Currently // A data point containing the current weather conditions at the requested location.

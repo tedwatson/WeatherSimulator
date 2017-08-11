@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Assets.Scripts
 {
     class Minutely // A data block containing the weather conditions minute-by-minute for the next hour.

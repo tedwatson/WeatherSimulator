@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Assets.Scripts
 {
     class Hourly // A data block containing the weather conditions hour-by-hour for the next two days.
