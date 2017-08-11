@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    class Location
+    class Location // Class used for storing location information retrieved from an API
     {
+        // Information on the computer's location
         public string ip { get; set; }
         public string country_code { get; set; }
         public string country_name { get; set; }
@@ -21,6 +22,7 @@ namespace Assets.Scripts
 
     public Location()
         {
+            // Initialize variables
             ip = null;
             country_code = null;
             country_name = null;
