@@ -950,7 +950,6 @@ public class Main : MonoBehaviour {
         myDarkSkyCall.minutely.data[0].summary = myDarkSkyCall.currently.summary;
         myDarkSkyCall.minutely.data[0].icon = myDarkSkyCall.currently.icon;
         myDarkSkyCall.minutely.data[0].precipIntensity = myDarkSkyCall.currently.precipIntensity;
-        myDarkSkyCall.minutely.data[0].precipIntensityError = myDarkSkyCall.currently.precipIntensityError;
         myDarkSkyCall.minutely.data[0].precipProbability = myDarkSkyCall.currently.precipProbability;
         myDarkSkyCall.minutely.data[0].precipType = myDarkSkyCall.currently.precipType;
         myDarkSkyCall.minutely.data[0].temperature = myDarkSkyCall.currently.temperature;
