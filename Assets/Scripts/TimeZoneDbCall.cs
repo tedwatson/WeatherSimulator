@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    class TimeZoneDbCall
+    class TimeZoneDbCall // Class for storing the deserialized JSON text from an API call containing Time Zone information
     {
         public string status { get; set; }// Status of the API query. Either OK or FAILED.
         public string message { get; set; } // Error message. Empty if no error.
@@ -22,6 +22,7 @@ namespace Assets.Scripts
 
         public TimeZoneDbCall()
         {
+            // Initialize Variables
             status = null;
             message = null;
             countryCode = null;
